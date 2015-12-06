@@ -31,10 +31,12 @@ public class MainMenuFragment extends Fragment implements View.OnClickListener {
 
     public interface Listener {
         void onSetToolbar();
-
         void onMainMenuSignInButtonClicked();
-
         void onMainMenuSignOutButtonClicked();
+        void onStartNewGameClicked();
+        void onLeaderBoardClicked();
+        void onAchievementsClicked();
+        void onAboutUsClicked();
     }
 
     Listener mListener = null;
@@ -147,18 +149,22 @@ public class MainMenuFragment extends Fragment implements View.OnClickListener {
         }
 
         if (view.getId() == R.id.bNewGame || view.getId() == R.id.fabNewGame) {
+            mListener.onStartNewGameClicked();
             Toast.makeText(getActivity(), "New Game under construction", Toast.LENGTH_SHORT).show();
         }
 
         if (view.getId() == R.id.bLeaderBoard || view.getId() == R.id.fabLeaderBoard) {
+            mListener.onLeaderBoardClicked();
             Toast.makeText(getActivity(), "Leader Board under construction", Toast.LENGTH_SHORT).show();
         }
 
         if (view.getId() == R.id.bAchievements || view.getId() == R.id.fabAchievements) {
+            mListener.onAchievementsClicked();
             Toast.makeText(getActivity(), "Achievements under construction", Toast.LENGTH_SHORT).show();
         }
 
         if (view.getId() == R.id.bAboutUs || view.getId() == R.id.fabAboutUs) {
+            mListener.onAboutUsClicked();
             Toast.makeText(getActivity(), "About Us under construction", Toast.LENGTH_SHORT).show();
         }
     }

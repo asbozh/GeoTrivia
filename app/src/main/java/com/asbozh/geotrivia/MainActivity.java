@@ -16,7 +16,10 @@ import com.google.android.gms.games.Player;
 import com.google.example.games.basegameutils.BaseGameUtils;
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener, SignInFragment.Listener, MainMenuFragment.Listener {
+        GoogleApiClient.OnConnectionFailedListener, SignInFragment.Listener, MainMenuFragment.Listener, AboutUsFragment.Listener {
+
+    // 1 - SignInFragment, 2 - MainMenuFragment, 3 - AboutUsFragment
+    private int currentFragmentState = 2;
 
     // SharedPreferences object and variables
     SharedPreferences mSharedPreferences;
@@ -28,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     // Fragments
     SignInFragment mSignInFragment;
     MainMenuFragment mMainMenuFragment;
+    AboutUsFragment mAboutUsFragment;
 
     // Client used to interact with Google APIs
     private GoogleApiClient mGoogleApiClient;
@@ -65,10 +69,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         // Create fragments
         mSignInFragment = new SignInFragment();
         mMainMenuFragment = new MainMenuFragment();
+        mAboutUsFragment = new AboutUsFragment();
 
         // listen to fragment events
         mSignInFragment.setListener(this);
         mMainMenuFragment.setListener(this);
+        mAboutUsFragment.setListener(this);
 
         // Loading saved shared preferences
         mSharedPreferences = getPreferences(Context.MODE_PRIVATE);
@@ -84,8 +90,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
         if (isFirstTimeStarted && !isSignedIn()) {
             getFragmentManager().beginTransaction().add(R.id.fragment_container, mSignInFragment).commit();
+            currentFragmentState = 1;
         } else {
             getFragmentManager().beginTransaction().add(R.id.fragment_container, mMainMenuFragment).commit();
+            currentFragmentState = 2;
         }
 
     }
@@ -134,6 +142,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         mSignInClicked = true;
         firstTimePassed();
         getFragmentManager().beginTransaction().replace(R.id.fragment_container, mMainMenuFragment).commit();
+        currentFragmentState = 2;
     }
 
     @Override
@@ -158,6 +167,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
         firstTimePassed();
         getFragmentManager().beginTransaction().replace(R.id.fragment_container, mMainMenuFragment).commit();
+        currentFragmentState = 2;
     }
 
     /***
@@ -269,5 +279,49 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         onSetToolbar();
     }
 
+    @Override
+    public void onStartNewGameClicked() {
 
+    }
+
+    @Override
+    public void onLeaderBoardClicked() {
+
+    }
+
+    @Override
+    public void onAchievementsClicked() {
+
+    }
+
+    @Override
+    public void onAboutUsClicked() {
+        getFragmentManager().beginTransaction().replace(R.id.fragment_container, mAboutUsFragment).commit();
+        currentFragmentState = 3;
+    }
+
+    /***
+     * *
+     * Methods from AboutUsFragment
+     * *
+     ***/
+
+    @Override
+    public void onAboutUsBackClicked() {
+        getFragmentManager().beginTransaction().replace(R.id.fragment_container, mMainMenuFragment).commit();
+        currentFragmentState = 2;
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        // 1 - SignInFragment, 2 - MainMenuFragment, 3 - AboutUsFragment
+        if (currentFragmentState == 3) {
+            getFragmentManager().beginTransaction().replace(R.id.fragment_container, mMainMenuFragment).commit();
+            currentFragmentState = 2;
+        }
+        else {
+            super.onBackPressed();
+        }
+    }
 }

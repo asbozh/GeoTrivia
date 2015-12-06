@@ -20,10 +20,13 @@
     <string name="menuAchievements">Постижения</string>
     <string name="menuAboutUs">За нас</string>
 
+    <string name="about_us_text">Atanas Bozhkov\nF54630</string>
+
 
     <string name="saved_first_time">com.asbozh.mainactivity.saved_first_time</string>
     <string name="saved_nickname">com.asbozh.mainactivity.saved_nickname</string>
     <string name="saved_local_nickname">com.asbozh.mainactivity.saved_local_nickname</string>
     <string name="saved_is_offline">com.asbozh.mainactivity.saved_is_offline</string>
     <string name="button_sign_out">Излез</string>
+
 </resources>
