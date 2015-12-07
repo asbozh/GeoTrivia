@@ -165,7 +165,6 @@ public class MainMenuFragment extends Fragment implements View.OnClickListener {
 
         if (view.getId() == R.id.bAboutUs || view.getId() == R.id.fabAboutUs) {
             mListener.onAboutUsClicked();
-            Toast.makeText(getActivity(), "About Us under construction", Toast.LENGTH_SHORT).show();
         }
     }
 }

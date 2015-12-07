@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvChooseLevel"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/action_bar_default_height_material"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"
+        android:gravity="center"
+        android:text="Изберете изпит"
+        android:textSize="@dimen/text_size_headline_material" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/llForButtons"
+        android:layout_below="@+id/tvChooseLevel">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/tvHorizontalLine"
+            android:layout_toLeftOf="@+id/tvVerticalLine"
+            android:layout_toStartOf="@+id/tvVerticalLine">
+
+            <TextView
+                android:id="@+id/tvTest2015"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/tvColored2015"
+                android:gravity="center"
+                android:text="Матура 2015"
+                android:textSize="@dimen/text_size_headline_material" />
+
+            <TextView
+                android:id="@+id/tvColored2015"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/action_bar_default_height_material"
+                android:layout_alignParentBottom="true"
+                android:background="@color/common_signin_btn_default_background" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/tvHorizontalLine"
+            android:layout_toEndOf="@+id/tvVerticalLine"
+            android:layout_toRightOf="@+id/tvVerticalLine">
+
+            <TextView
+                android:id="@+id/tvTest2014"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/tvColored2014"
+                android:gravity="center"
+                android:text="Матура 2014"
+                android:textSize="@dimen/text_size_headline_material" />
+
+            <TextView
+                android:id="@+id/tvColored2014"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/action_bar_default_height_material"
+                android:layout_alignParentBottom="true"
+                android:background="@color/colorAccent" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tvVerticalLine"
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:background="#000000" />
+
+        <TextView
+            android:id="@+id/tvHorizontalLine"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_centerInParent="true"
+            android:background="#000000" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/tvHorizontalLine"
+            android:layout_toLeftOf="@+id/tvVerticalLine"
+            android:layout_toStartOf="@+id/tvVerticalLine">
+
+            <TextView
+                android:id="@+id/tvTest2013"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/tvColored2013"
+                android:gravity="center"
+                android:text="Матура 2013"
+                android:textSize="@dimen/text_size_headline_material" />
+
+            <TextView
+                android:id="@+id/tvColored2013"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/action_bar_default_height_material"
+                android:layout_alignParentBottom="true"
+                android:background="#156156" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/tvHorizontalLine"
+            android:layout_toEndOf="@+id/tvVerticalLine"
+            android:layout_toRightOf="@+id/tvVerticalLine">
+
+            <TextView
+                android:id="@+id/tvTest2012"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/tvColored2012"
+                android:gravity="center"
+                android:text="Матура 2012"
+                android:textSize="@dimen/text_size_headline_material" />
+
+            <TextView
+                android:id="@+id/tvColored2012"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/action_bar_default_height_material"
+                android:layout_alignParentBottom="true"
+                android:background="@color/colorPrimaryDark" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/llForButtons"
+        android:layout_width="match_parent"
+        android:layout_height="112dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/common_signin_btn_light_text_default"
+        android:baselineAligned="false"
+
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fabChooseLevelBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fabStartLevel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+        </FrameLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

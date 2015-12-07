@@ -16,9 +16,9 @@ import com.google.android.gms.games.Player;
 import com.google.example.games.basegameutils.BaseGameUtils;
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener, SignInFragment.Listener, MainMenuFragment.Listener, AboutUsFragment.Listener {
+        GoogleApiClient.OnConnectionFailedListener, SignInFragment.Listener, MainMenuFragment.Listener, AboutUsFragment.Listener, ChooseLevelFragment.Listener {
 
-    // 1 - SignInFragment, 2 - MainMenuFragment, 3 - AboutUsFragment
+    // 1 - SignInFragment, 2 - MainMenuFragment, 3 - AboutUsFragment, 4 - ChooseLevelFragment
     private int currentFragmentState = 2;
 
     // SharedPreferences object and variables
@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     SignInFragment mSignInFragment;
     MainMenuFragment mMainMenuFragment;
     AboutUsFragment mAboutUsFragment;
+    ChooseLevelFragment mChooseLevelFragment;
 
     // Client used to interact with Google APIs
     private GoogleApiClient mGoogleApiClient;
@@ -70,11 +71,13 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         mSignInFragment = new SignInFragment();
         mMainMenuFragment = new MainMenuFragment();
         mAboutUsFragment = new AboutUsFragment();
+        mChooseLevelFragment = new ChooseLevelFragment();
 
         // listen to fragment events
         mSignInFragment.setListener(this);
         mMainMenuFragment.setListener(this);
         mAboutUsFragment.setListener(this);
+        mChooseLevelFragment.setListener(this);
 
         // Loading saved shared preferences
         mSharedPreferences = getPreferences(Context.MODE_PRIVATE);
@@ -281,7 +284,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
     @Override
     public void onStartNewGameClicked() {
-
+        getFragmentManager().beginTransaction().replace(R.id.fragment_container, mChooseLevelFragment).commit();
+        currentFragmentState = 4;
     }
 
     @Override
@@ -312,11 +316,24 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         currentFragmentState = 2;
     }
 
+    /***
+     * *
+     * Methods from AboutUsFragment
+     * *
+     ***/
+
+    @Override
+    public void onChooseLevelBackButtonPressed() {
+        getFragmentManager().beginTransaction().replace(R.id.fragment_container, mMainMenuFragment).commit();
+        currentFragmentState = 2;
+    }
+
+
 
     @Override
     public void onBackPressed() {
-        // 1 - SignInFragment, 2 - MainMenuFragment, 3 - AboutUsFragment
-        if (currentFragmentState == 3) {
+        // 1 - SignInFragment, 2 - MainMenuFragment, 3 - AboutUsFragment, 4 - ChooseLevelFragment
+        if (currentFragmentState == 3 || currentFragmentState == 4) {
             getFragmentManager().beginTransaction().replace(R.id.fragment_container, mMainMenuFragment).commit();
             currentFragmentState = 2;
         }
