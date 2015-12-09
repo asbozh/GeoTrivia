@@ -150,7 +150,6 @@ public class MainMenuFragment extends Fragment implements View.OnClickListener {
 
         if (view.getId() == R.id.bNewGame || view.getId() == R.id.fabNewGame) {
             mListener.onStartNewGameClicked();
-            Toast.makeText(getActivity(), "New Game under construction", Toast.LENGTH_SHORT).show();
         }
 
         if (view.getId() == R.id.bLeaderBoard || view.getId() == R.id.fabLeaderBoard) {
