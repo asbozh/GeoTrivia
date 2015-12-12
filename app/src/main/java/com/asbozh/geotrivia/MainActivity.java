@@ -335,6 +335,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
     @Override
     public void onStartLevelClicked() {
+        mGameFragment.setChosenLevel(mChooseLevelFragment.getLevelClicked());
         getFragmentManager().beginTransaction().replace(R.id.fragment_container, mGameFragment).commit();
         currentFragmentState = 5;
     }
