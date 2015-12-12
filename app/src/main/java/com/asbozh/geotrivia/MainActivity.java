@@ -1,6 +1,8 @@
 package com.asbozh.geotrivia;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -16,9 +18,9 @@ import com.google.android.gms.games.Player;
 import com.google.example.games.basegameutils.BaseGameUtils;
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener, SignInFragment.Listener, MainMenuFragment.Listener, AboutUsFragment.Listener, ChooseLevelFragment.Listener {
+        GoogleApiClient.OnConnectionFailedListener, SignInFragment.Listener, MainMenuFragment.Listener, AboutUsFragment.Listener, ChooseLevelFragment.Listener, GameFragment.Listener {
 
-    // 1 - SignInFragment, 2 - MainMenuFragment, 3 - AboutUsFragment, 4 - ChooseLevelFragment
+    // 1 - SignInFragment, 2 - MainMenuFragment, 3 - AboutUsFragment, 4 - ChooseLevelFragment, 5 - GameFragment
     private int currentFragmentState = 2;
 
     // SharedPreferences object and variables
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     MainMenuFragment mMainMenuFragment;
     AboutUsFragment mAboutUsFragment;
     ChooseLevelFragment mChooseLevelFragment;
+    GameFragment mGameFragment;
 
     // Client used to interact with Google APIs
     private GoogleApiClient mGoogleApiClient;
@@ -72,12 +75,14 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         mMainMenuFragment = new MainMenuFragment();
         mAboutUsFragment = new AboutUsFragment();
         mChooseLevelFragment = new ChooseLevelFragment();
+        mGameFragment = new GameFragment();
 
         // listen to fragment events
         mSignInFragment.setListener(this);
         mMainMenuFragment.setListener(this);
         mAboutUsFragment.setListener(this);
         mChooseLevelFragment.setListener(this);
+        mGameFragment.setListener(this);
 
         // Loading saved shared preferences
         mSharedPreferences = getPreferences(Context.MODE_PRIVATE);
@@ -318,7 +323,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
     /***
      * *
-     * Methods from AboutUsFragment
+     * Methods from ChooseLevelFragment
      * *
      ***/
 
@@ -328,17 +333,54 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         currentFragmentState = 2;
     }
 
+    @Override
+    public void onStartLevelClicked() {
+        getFragmentManager().beginTransaction().replace(R.id.fragment_container, mGameFragment).commit();
+        currentFragmentState = 5;
+    }
+
+    /***
+     * *
+     * Methods from GameFragment
+     * *
+     ***/
+
+    @Override
+    public void onGameFinish() {
+
+    }
 
 
     @Override
     public void onBackPressed() {
-        // 1 - SignInFragment, 2 - MainMenuFragment, 3 - AboutUsFragment, 4 - ChooseLevelFragment
+        // 1 - SignInFragment, 2 - MainMenuFragment, 3 - AboutUsFragment, 4 - ChooseLevelFragment, 5 - GameFragment
         if (currentFragmentState == 3 || currentFragmentState == 4) {
             getFragmentManager().beginTransaction().replace(R.id.fragment_container, mMainMenuFragment).commit();
             currentFragmentState = 2;
+        } else if (currentFragmentState == 5) {
+            AlertDialog.Builder adBuilder = new AlertDialog.Builder(this);
+            adBuilder.setMessage(getString(R.string.exit_dialog_body));
+            adBuilder.setCancelable(false);
+            adBuilder.setPositiveButton(getResources().getString(R.string.exit_dialog_positive), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    getFragmentManager().beginTransaction().replace(R.id.fragment_container, mMainMenuFragment).commit();
+                    currentFragmentState = 2;
+                }
+            });
+            adBuilder.setNegativeButton(getResources().getString(R.string.exit_dialog_negative), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+            AlertDialog alertDialog = adBuilder.create();
+            alertDialog.show();
         }
         else {
             super.onBackPressed();
         }
     }
+
+
 }

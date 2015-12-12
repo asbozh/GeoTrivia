@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -28,6 +27,7 @@ public class ChooseLevelFragment extends Fragment implements View.OnClickListene
 
     public interface Listener {
         void onChooseLevelBackButtonPressed();
+        void onStartLevelClicked();
     }
 
     Listener mListener = null;
@@ -108,7 +108,7 @@ public class ChooseLevelFragment extends Fragment implements View.OnClickListene
             mListener.onChooseLevelBackButtonPressed();
         }
         if (v.getId() == R.id.fabStartLevel) {
-            Toast.makeText(getActivity(), "Start level clicked..", Toast.LENGTH_SHORT).show();
+            mListener.onStartLevelClicked();
         }
     }
 

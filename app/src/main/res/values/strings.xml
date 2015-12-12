@@ -29,4 +29,8 @@
     <string name="saved_is_offline">com.asbozh.mainactivity.saved_is_offline</string>
     <string name="button_sign_out">Излез</string>
 
+    <string name="exit_dialog_body">Искате ли да прекратите теста?</string>
+    <string name="exit_dialog_positive">Да</string>
+    <string name="exit_dialog_negative">Не</string>
+
 </resources>
