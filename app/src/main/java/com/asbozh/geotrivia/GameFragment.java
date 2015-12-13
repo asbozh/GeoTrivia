@@ -4,10 +4,12 @@ package com.asbozh.geotrivia;
 import android.app.Fragment;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -15,7 +17,10 @@ import java.util.Random;
 
 public class GameFragment extends Fragment {
 
-    private TextView tvQuestion;
+    private TextView tvQuestion, tvAnswer1, tvAnswer2, tvAnswer3, tvAnswer4;
+    private TextView tvUserName, tvCurrentQuestion, tvPoints;
+    private EditText etAnswer;
+    private FloatingActionButton fabAnswer;
 
     private int mChosenLevel;
     private ArrayList<Integer> mQuestionsOrder;
@@ -69,6 +74,15 @@ public class GameFragment extends Fragment {
 
     private void initViews() {
         tvQuestion = (TextView) getActivity().findViewById(R.id.tvQuestion);
+        tvAnswer1 = (TextView) getActivity().findViewById(R.id.tvAnswer1);
+        tvAnswer2 = (TextView) getActivity().findViewById(R.id.tvAnswer2);
+        tvAnswer3 = (TextView) getActivity().findViewById(R.id.tvAnswer3);
+        tvAnswer4 = (TextView) getActivity().findViewById(R.id.tvAnswer4);
+        tvUserName = (TextView) getActivity().findViewById(R.id.tvUserName);
+        tvCurrentQuestion = (TextView) getActivity().findViewById(R.id.tvCurrentQuestion);
+        tvPoints = (TextView) getActivity().findViewById(R.id.tvPoints);
+        etAnswer = (EditText) getActivity().findViewById(R.id.etAnswer);
+        fabAnswer = (FloatingActionButton) getActivity().findViewById(R.id.fabAnswer);
     }
 
 
