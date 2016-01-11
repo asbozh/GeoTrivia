@@ -14,11 +14,11 @@ import android.widget.TextView;
 public class ChooseLevelFragment extends Fragment implements View.OnClickListener {
 
 
-    // 0 - nothing clicked, 2015 - Test 2015, 2014 - Test 2014, 2013 - Test 2013, 2012 - Test 2012
+    // 0 - nothing clicked, 1 - Geography, 2 - History, 3 - Biology, 4 - Philosophy
     private int levelClicked = 0;
 
 
-    private TextView tvLvl2015, tvColorLvl2015, tvLvl2014, tvColorLvl2014, tvLvl2013, tvColorLvl2013, tvLvl2012, tvColorLvl2012;
+    private TextView tvTestGeo, tvColoredGeo, tvTestHis, tvColoredHis, tvTestBio, tvColoredBio, tvTestPhi, tvColoredPhi;
     private FloatingActionButton fabStartLevel, fabChooseLevelBack;
 
     public interface Listener {
@@ -50,46 +50,46 @@ public class ChooseLevelFragment extends Fragment implements View.OnClickListene
     }
 
     private void initViews() {
-        tvLvl2015 = (TextView) getActivity().findViewById(R.id.tvTest2015);
-        tvColorLvl2015 = (TextView) getActivity().findViewById(R.id.tvColored2015);
-        tvLvl2014 = (TextView) getActivity().findViewById(R.id.tvTest2014);
-        tvColorLvl2014 = (TextView) getActivity().findViewById(R.id.tvColored2014);
-        tvLvl2013 = (TextView) getActivity().findViewById(R.id.tvTest2013);
-        tvColorLvl2013 = (TextView) getActivity().findViewById(R.id.tvColored2013);
-        tvLvl2012 = (TextView) getActivity().findViewById(R.id.tvTest2012);
-        tvColorLvl2012 = (TextView) getActivity().findViewById(R.id.tvColored2012);
+        tvTestGeo = (TextView) getActivity().findViewById(R.id.tvTestGeo);
+        tvColoredGeo = (TextView) getActivity().findViewById(R.id.tvColoredGeo);
+        tvTestHis = (TextView) getActivity().findViewById(R.id.tvTestHis);
+        tvColoredHis = (TextView) getActivity().findViewById(R.id.tvColoredHis);
+        tvTestBio = (TextView) getActivity().findViewById(R.id.tvTestBio);
+        tvColoredBio = (TextView) getActivity().findViewById(R.id.tvColored2013);
+        tvTestPhi = (TextView) getActivity().findViewById(R.id.tvTestPhi);
+        tvColoredPhi = (TextView) getActivity().findViewById(R.id.tvColoredPhi);
         fabStartLevel = (FloatingActionButton) getActivity().findViewById(R.id.fabStartLevel);
         fabStartLevel.setVisibility(View.INVISIBLE);
         fabChooseLevelBack = (FloatingActionButton) getActivity().findViewById(R.id.fabChooseLevelBack);
 
-        tvLvl2015.setOnClickListener(this);
-        tvLvl2014.setOnClickListener(this);
-        tvLvl2013.setOnClickListener(this);
-        tvLvl2012.setOnClickListener(this);
-        tvColorLvl2015.setOnClickListener(this);
-        tvColorLvl2014.setOnClickListener(this);
-        tvColorLvl2013.setOnClickListener(this);
-        tvColorLvl2012.setOnClickListener(this);
+        tvTestGeo.setOnClickListener(this);
+        tvTestHis.setOnClickListener(this);
+        tvTestBio.setOnClickListener(this);
+        tvTestPhi.setOnClickListener(this);
+        tvColoredGeo.setOnClickListener(this);
+        tvColoredHis.setOnClickListener(this);
+        tvColoredBio.setOnClickListener(this);
+        tvColoredPhi.setOnClickListener(this);
         fabStartLevel.setOnClickListener(this);
         fabChooseLevelBack.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.tvTest2015 || v.getId() == R.id.tvColored2015) {
-            levelClicked = 2015;
+        if (v.getId() == R.id.tvTestGeo || v.getId() == R.id.tvColoredGeo) {
+            levelClicked = 1;
             fabStartLevel.setVisibility(View.VISIBLE);
         }
-        if (v.getId() == R.id.tvTest2014 || v.getId() == R.id.tvColored2014) {
-            levelClicked = 2014;
+        if (v.getId() == R.id.tvTestHis || v.getId() == R.id.tvColoredHis) {
+            levelClicked = 2;
             fabStartLevel.setVisibility(View.VISIBLE);
         }
-        if (v.getId() == R.id.tvTest2013 || v.getId() == R.id.tvColored2013) {
-            levelClicked = 2013;
+        if (v.getId() == R.id.tvTestBio || v.getId() == R.id.tvColored2013) {
+            levelClicked = 3;
             fabStartLevel.setVisibility(View.VISIBLE);
         }
-        if (v.getId() == R.id.tvTest2012 || v.getId() == R.id.tvColored2012) {
-            levelClicked = 2012;
+        if (v.getId() == R.id.tvTestPhi || v.getId() == R.id.tvColoredPhi) {
+            levelClicked = 4;
             fabStartLevel.setVisibility(View.VISIBLE);
         }
         if (v.getId() == R.id.fabChooseLevelBack) {

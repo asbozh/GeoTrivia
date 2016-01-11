@@ -2,14 +2,12 @@ package com.asbozh.geotrivia;
 
 
 import android.app.Fragment;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -19,12 +17,12 @@ public class GameFragment extends Fragment {
 
     private TextView tvQuestion, tvAnswer1, tvAnswer2, tvAnswer3, tvAnswer4;
     private TextView tvUserName, tvCurrentQuestion, tvPoints;
-    private EditText etAnswer;
     private FloatingActionButton fabAnswer;
 
     private int mChosenLevel;
     private ArrayList<Integer> mQuestionsOrder;
-    private int specialQuestion, endQuestion;
+    private int totalQuestions = 30;
+    private int totalSQLdbQuestions = 100;
     private int currentQuestion = 1;
     private int points = 0;
 
@@ -41,22 +39,14 @@ public class GameFragment extends Fragment {
 
     public void setChosenLevel(int chosenLevel) {
         mChosenLevel = chosenLevel;
-        if (mChosenLevel == 2015) {
-            specialQuestion = 26;
-            endQuestion = 30;
-            new RandomOrder().execute(specialQuestion - 1, endQuestion);
-        } else if (mChosenLevel == 2014) {
-            specialQuestion = 30;
-            endQuestion = 32;
-            new RandomOrder().execute(specialQuestion - 1, endQuestion);
-        } else if (mChosenLevel == 2013) {
-            specialQuestion = 29;
-            endQuestion = 32;
-            new RandomOrder().execute(specialQuestion - 1, endQuestion);
-        } else if (mChosenLevel == 2012) {
-            specialQuestion = 30;
-            endQuestion = 32;
-            new RandomOrder().execute(specialQuestion - 1, endQuestion);
+        if (mChosenLevel == 1) {
+            shuffleQuestions();
+        } else if (mChosenLevel == 2) {
+            shuffleQuestions();
+        } else if (mChosenLevel == 3) {
+            shuffleQuestions();
+        } else if (mChosenLevel == 4) {
+            shuffleQuestions();
         }
     }
 
@@ -69,6 +59,7 @@ public class GameFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initViews();
+        tvQuestion.setText("DONE");
 
     }
 
@@ -81,48 +72,32 @@ public class GameFragment extends Fragment {
         tvUserName = (TextView) getActivity().findViewById(R.id.tvUserName);
         tvCurrentQuestion = (TextView) getActivity().findViewById(R.id.tvCurrentQuestion);
         tvPoints = (TextView) getActivity().findViewById(R.id.tvPoints);
-        etAnswer = (EditText) getActivity().findViewById(R.id.etAnswer);
         fabAnswer = (FloatingActionButton) getActivity().findViewById(R.id.fabAnswer);
     }
 
+    private void shuffleQuestions() {
+        Random random = new Random();
+        int randomIndex, firstQuestion, randomQuestion;
+        mQuestionsOrder = new ArrayList<>();
+        for (int i = 1; i <= totalSQLdbQuestions; i++) {
+            mQuestionsOrder.add(i); // so the number starts from 1 on position 0
+        }
+        Log.d("asbozh_numbers", mQuestionsOrder.toString());
 
-    private class RandomOrder extends AsyncTask<Integer, Void, ArrayList> {
-
-        @Override
-        protected ArrayList doInBackground(Integer... params) {
-            Random random = new Random();
-            int randomIndex, firstQuestion, randomQuestion;
-            ArrayList<Integer> questions = new ArrayList<>();
-            int n = params[0];
-            int totalNumber = params[1];
-            for (int i = 0; i < n; i++) {
-                questions.add(i + 1); // so the number starts from 1 on position 0
-            }
-
-            Log.d("asbozh_numbers", questions.toString());
-
-            for (int i = 0; i < n; i++) {
-                randomIndex = 1 + random.nextInt(questions.size() - 1);
-                firstQuestion = questions.get(0);
-                randomQuestion = questions.get(randomIndex);
-                questions.set(0, randomQuestion);
-                questions.set(randomIndex, firstQuestion);
-            }
-            for (int i = n + 1; i <= totalNumber; i++) {
-                questions.add(i);
-            }
-
-            Log.d("asbozh_numbers", questions.toString());
-
-            return questions;
+        for (int i = 0; i < totalSQLdbQuestions * 3; i++) {
+            randomIndex = 1 + random.nextInt(mQuestionsOrder.size() - 1);
+            firstQuestion = mQuestionsOrder.get(0);
+            randomQuestion = mQuestionsOrder.get(randomIndex);
+            mQuestionsOrder.set(0, randomQuestion);
+            mQuestionsOrder.set(randomIndex, firstQuestion);
         }
 
-        @Override
-        protected void onPostExecute(ArrayList arrayList) {
-            // super.onPostExecute(arrayList);
-            mQuestionsOrder = arrayList;
-            Log.d("asbozh_numbers", mQuestionsOrder.toString());
-            tvQuestion.setText(mQuestionsOrder.toString());
+        Log.d("asbozh_numbers", mQuestionsOrder.toString());
+
+        while (mQuestionsOrder.size() > totalQuestions) {
+            mQuestionsOrder.remove(mQuestionsOrder.size() - 1);
         }
+        Log.d("asbozh_numbers", mQuestionsOrder.toString());
     }
+
 }

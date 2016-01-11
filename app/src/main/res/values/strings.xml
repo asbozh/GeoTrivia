@@ -14,7 +14,7 @@
     <string name="username_dialog_negative">Отказ</string>
     <string name="signin_other_error">Unable to Sign in</string>
 
-    <string name="tvHello">Здравейте</string>
+    <string name="tvHello">Здравейте,</string>
     <string name="menuNewGame">Нова Игра</string>
     <string name="menuLeaderBoard">Класация</string>
     <string name="menuAchievements">Постижения</string>
