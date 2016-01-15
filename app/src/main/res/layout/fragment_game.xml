@@ -14,6 +14,7 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fabAnswer"
+        android:visibility="invisible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/tvQuestion"
@@ -36,7 +37,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tvAnswer1"
+            android:id="@+id/tvOption1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
@@ -44,7 +45,7 @@
             android:textSize="@dimen/abc_text_size_title_material" />
 
         <TextView
-            android:id="@+id/tvAnswer2"
+            android:id="@+id/tvOption2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
@@ -52,7 +53,7 @@
             android:textSize="@dimen/abc_text_size_title_material" />
 
         <TextView
-            android:id="@+id/tvAnswer3"
+            android:id="@+id/tvOption3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
@@ -60,7 +61,7 @@
             android:textSize="@dimen/abc_text_size_title_material" />
 
         <TextView
-            android:id="@+id/tvAnswer4"
+            android:id="@+id/tvOption4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Answer 4"

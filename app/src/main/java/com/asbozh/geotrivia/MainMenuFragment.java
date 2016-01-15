@@ -95,8 +95,12 @@ public class MainMenuFragment extends Fragment implements View.OnClickListener {
     }
 
     public void setWelcomeUser(String nickName) {
-        nickName = "Здравейте " + nickName;
+        nickName = "Здравейте, " + nickName;
         tvWelcomeUser.setText(nickName);
+    }
+
+    public String getCurrentUserName() {
+        return tvWelcomeUser.getText().toString();
     }
 
     public void setOfflineUI(boolean isOffline) {
