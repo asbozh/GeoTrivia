@@ -67,6 +67,22 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         this.mNickName = mNickName.replace("Здравейте, ", "");
     }
 
+    public String getCurrentTable() {
+        return currentTable;
+    }
+
+    public ArrayList<Integer> getmQuestionsOrder() {
+        return mQuestionsOrder;
+    }
+
+    public int[] getUserAnswers() {
+        return userAnswers;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_game, container, false);

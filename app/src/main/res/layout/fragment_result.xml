@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rlHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"
+        android:minHeight="128dp">
+
+        <TextView
+            android:id="@+id/tvResultsHeader"
+            android:layout_marginTop="16dp"
+            android:layout_alignParentTop="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Резултати:"
+            android:gravity="center"
+            android:textColor="@color/common_signin_btn_light_text_pressed"
+            android:textSize="20dp"/>
+
+        <TextView
+            android:layout_below="@+id/tvResultsHeader"
+            android:layout_margin="16dp"
+            android:id="@+id/tvHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:textColor="@color/common_signin_btn_light_text_pressed"
+            android:textSize="16dp" />
+    </RelativeLayout>
+
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/tvFooter"
+        android:layout_below="@+id/rlHeader">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:layout_anchor="@+id/recycler_view"
+            app:layout_anchorGravity="bottom|end"
+            app:layout_behavior="com.asbozh.geotrivia.FABScrollBehavior"/>
+
+    </android.support.design.widget.CoordinatorLayout>
+
+    <TextView
+        android:id="@+id/tvFooter"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"
+        android:gravity="center"
+        android:text="Сподели във Facebook"
+        android:textColor="@color/common_signin_btn_light_text_pressed"
+        android:textSize="20sp" />
+
+
+</RelativeLayout>

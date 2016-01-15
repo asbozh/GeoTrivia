@@ -17,10 +17,10 @@ import com.google.android.gms.games.Games;
 import com.google.android.gms.games.Player;
 import com.google.example.games.basegameutils.BaseGameUtils;
 
-public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener, SignInFragment.Listener, MainMenuFragment.Listener, AboutUsFragment.Listener, ChooseLevelFragment.Listener, GameFragment.Listener {
+public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
+        SignInFragment.Listener, MainMenuFragment.Listener, AboutUsFragment.Listener, ChooseLevelFragment.Listener, GameFragment.Listener, ResultFragment.Listener {
 
-    // 1 - SignInFragment, 2 - MainMenuFragment, 3 - AboutUsFragment, 4 - ChooseLevelFragment, 5 - GameFragment
+    // 1 - SignInFragment, 2 - MainMenuFragment, 3 - AboutUsFragment, 4 - ChooseLevelFragment, 5 - GameFragment, 6 - ResultFragment
     private int currentFragmentState = 2;
 
     // SharedPreferences object and variables
@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     AboutUsFragment mAboutUsFragment;
     ChooseLevelFragment mChooseLevelFragment;
     GameFragment mGameFragment;
+    ResultFragment mResultFragment;
 
     // Client used to interact with Google APIs
     private GoogleApiClient mGoogleApiClient;
@@ -76,6 +77,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         mAboutUsFragment = new AboutUsFragment();
         mChooseLevelFragment = new ChooseLevelFragment();
         mGameFragment = new GameFragment();
+        mResultFragment = new ResultFragment();
 
         // listen to fragment events
         mSignInFragment.setListener(this);
@@ -83,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         mAboutUsFragment.setListener(this);
         mChooseLevelFragment.setListener(this);
         mGameFragment.setListener(this);
+        mResultFragment.setListener(this);
 
         // Loading saved shared preferences
         mSharedPreferences = getPreferences(Context.MODE_PRIVATE);
@@ -350,14 +353,31 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
     @Override
     public void onGameFinish() {
+        mResultFragment.setPoints(mGameFragment.getPoints());
+        mResultFragment.setCurrentTable(mGameFragment.getCurrentTable());
+        mResultFragment.setmQuestionsOrder(mGameFragment.getmQuestionsOrder());
+        mResultFragment.setmUserAnswers(mGameFragment.getUserAnswers());
+        getFragmentManager().beginTransaction().replace(R.id.fragment_container, mResultFragment).commit();
+        currentFragmentState = 6;
+    }
 
+    /***
+     * *
+     * Methods from ResultFragment
+     * *
+     ***/
+
+    @Override
+    public void onPlayAgain() {
+        getFragmentManager().beginTransaction().replace(R.id.fragment_container, mChooseLevelFragment).commit();
+        currentFragmentState = 4;
     }
 
 
     @Override
     public void onBackPressed() {
-        // 1 - SignInFragment, 2 - MainMenuFragment, 3 - AboutUsFragment, 4 - ChooseLevelFragment, 5 - GameFragment
-        if (currentFragmentState == 3 || currentFragmentState == 4) {
+        // 1 - SignInFragment, 2 - MainMenuFragment, 3 - AboutUsFragment, 4 - ChooseLevelFragment, 5 - GameFragment, 6 - ResultFragment
+        if (currentFragmentState == 3 || currentFragmentState == 4 || currentFragmentState == 6) {
             getFragmentManager().beginTransaction().replace(R.id.fragment_container, mMainMenuFragment).commit();
             currentFragmentState = 2;
         } else if (currentFragmentState == 5) {
@@ -384,6 +404,5 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             super.onBackPressed();
         }
     }
-
 
 }
