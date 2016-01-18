@@ -5,8 +5,10 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.text.InputFilter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -78,9 +80,13 @@ public class MainMenuFragment extends Fragment implements View.OnClickListener {
         bAboutUs = (Button) getActivity().findViewById(R.id.bAboutUs);
 
         fabNewGame = (FloatingActionButton) getActivity().findViewById(R.id.fabNewGame);
+        fabNewGame.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.colorNewGameFAB)));
         fabLeaderBoard = (FloatingActionButton) getActivity().findViewById(R.id.fabLeaderBoard);
+        fabLeaderBoard.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.colorHighScoresFAB)));
         fabAchievements = (FloatingActionButton) getActivity().findViewById(R.id.fabAchievements);
+        fabAchievements.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.colorAchievementsFAB)));
         fabAboutUs = (FloatingActionButton) getActivity().findViewById(R.id.fabAboutUs);
+        fabAboutUs.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.colorAboutUsFAB)));
 
         bSignIn.setOnClickListener(this);
         bSignOut.setOnClickListener(this);

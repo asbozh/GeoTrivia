@@ -2,7 +2,35 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#00C853</color>
 
+    <color name="colorNewGameFAB">#66BB6A</color>
+    <color name="colorHighScoresFAB">#FFC107</color>
+    <color name="colorAchievementsFAB">#FF6F00</color>
+    <color name="colorAboutUsFAB">#BDBDBD</color>
+    <color name="colorAboutUsBackFAB">#A5D6A7</color>
+
+    <color name="colorGeography">#009688</color>
+    <color name="colorGeography_50">#E0F2F1</color>
+    <color name="colorGeography_accent">#00BFA5</color>
+
+    <color name="colorHistory">#3F51B5</color>
+    <color name="colorHistory_50">#E8EAF6</color>
+    <color name="colorHistory_accent">#304FFE</color>
+
+    <color name="colorBiology">#F44336</color>
+    <color name="colorBiology_50">#FFEBEE</color>
+    <color name="colorBiology_accent">#D50000</color>
+
+    <color name="colorPhilosophy">#E91E63</color>
+    <color name="colorPhilosophy_50">#FCE4EC</color>
+    <color name="colorPhilosophy_accent">#C51162</color>
+
+    <color name="correct_answer">#4CAF50</color>
+    <color name="wrong_answer">#F44336</color>
+
+    <color name="black_text">#696969</color>
+    <color name="white_background">#FBFBFB</color>
+    <color name="white">#ffffff</color>
     <color name="black_overlay">#66000000</color>
 </resources>

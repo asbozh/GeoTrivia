@@ -2,14 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/common_signin_btn_default_background"
     android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/action_bar_default_height_material"
         android:elevation="4dp"
-        android:background="@color/colorPrimary">
+        android:background="#BDBDBD">
 
         <TextView
             android:id="@+id/tvWelcomeUser"
@@ -51,6 +50,7 @@
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fabNewGame"
+            android:src="@drawable/play"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/fabLeaderBoard"
@@ -74,6 +74,7 @@
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fabLeaderBoard"
+            android:src="@drawable/star"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/tvCentralHorizontal"
@@ -110,6 +111,7 @@
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fabAchievements"
+            android:src="@drawable/trophy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/fabLeaderBoard"
@@ -132,6 +134,7 @@
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fabAboutUs"
+            android:src="@drawable/school"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/fabAchievements"
@@ -145,8 +148,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/fabAboutUs"
-            android:layout_alignRight="@+id/bAchievements"
-            android:layout_alignEnd="@+id/bAchievements"
             android:layout_toEndOf="@+id/fabAboutUs"
             android:layout_toRightOf="@+id/fabAboutUs"
             android:gravity="center_vertical"

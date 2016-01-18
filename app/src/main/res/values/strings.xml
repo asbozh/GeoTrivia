@@ -4,8 +4,8 @@
     <string name="tv_welcome">Добре дошли!</string>
     <string name="btn_skip">Пропусни</string>
     <string name="skip_dialog_title">Свързан или офлайн?</string>
-    <string name="skip_dialog_body">Ако влезете с Google акаунт ще можете да персонализирате вашето преживяване в играта, участвате в класации, отключвате постижения, записвате прогреса си
-        и споделяте вашите резултати в социалните мрежи.\n Сигурни ли сте, че искате да пропуснете това и да продължите офлайн?</string>
+    <string name="skip_dialog_body">Ако влезете с Google акаунт ще можете да персонализирате Вашата игра, като: участвате в класации, отключвате постижения, записвате прогреса си
+        и споделяте Вашите резултати в социалните мрежи.\n Сигурни ли сте, че искате да пропуснете това и да продължите офлайн?</string>
     <string name="skip_dialog_negative">Назад</string>
     <string name="username_dialog_hint">Играч</string>
     <string name="username_dialog_title">Офлайн режим</string>
@@ -18,7 +18,7 @@
     <string name="menuNewGame">Нова Игра</string>
     <string name="menuLeaderBoard">Класация</string>
     <string name="menuAchievements">Постижения</string>
-    <string name="menuAboutUs">За нас</string>
+    <string name="menuAboutUs">Информация</string>
 
     <string name="about_us_text">Atanas Bozhkov\nF54630</string>
 

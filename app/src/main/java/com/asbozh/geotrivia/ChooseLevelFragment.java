@@ -2,8 +2,10 @@ package com.asbozh.geotrivia;
 
 
 import android.app.Fragment;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,8 +61,10 @@ public class ChooseLevelFragment extends Fragment implements View.OnClickListene
         tvTestPhi = (TextView) getActivity().findViewById(R.id.tvTestPhi);
         tvColoredPhi = (TextView) getActivity().findViewById(R.id.tvColoredPhi);
         fabStartLevel = (FloatingActionButton) getActivity().findViewById(R.id.fabStartLevel);
-        fabStartLevel.setVisibility(View.INVISIBLE);
+        fabStartLevel.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.white)));
         fabChooseLevelBack = (FloatingActionButton) getActivity().findViewById(R.id.fabChooseLevelBack);
+        fabChooseLevelBack.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.white)));
+
 
         tvTestGeo.setOnClickListener(this);
         tvTestHis.setOnClickListener(this);
@@ -78,25 +82,56 @@ public class ChooseLevelFragment extends Fragment implements View.OnClickListene
     public void onClick(View v) {
         if (v.getId() == R.id.tvTestGeo || v.getId() == R.id.tvColoredGeo) {
             levelClicked = 1;
-            fabStartLevel.setVisibility(View.VISIBLE);
+            tvTestGeo.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.colorGeography));
+            tvTestGeo.setTextColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.white));
+            unSelectOthers(levelClicked);
+            fabStartLevel.show();
         }
         if (v.getId() == R.id.tvTestHis || v.getId() == R.id.tvColoredHis) {
             levelClicked = 2;
-            fabStartLevel.setVisibility(View.VISIBLE);
+            tvTestHis.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.colorHistory));
+            tvTestHis.setTextColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.white));
+            unSelectOthers(levelClicked);
+            fabStartLevel.show();
         }
         if (v.getId() == R.id.tvTestBio || v.getId() == R.id.tvColored2013) {
             levelClicked = 3;
-            fabStartLevel.setVisibility(View.VISIBLE);
+            tvTestBio.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.colorBiology));
+            tvTestBio.setTextColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.white));
+            unSelectOthers(levelClicked);
+            fabStartLevel.show();
         }
         if (v.getId() == R.id.tvTestPhi || v.getId() == R.id.tvColoredPhi) {
             levelClicked = 4;
-            fabStartLevel.setVisibility(View.VISIBLE);
+            tvTestPhi.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.colorPhilosophy));
+            tvTestPhi.setTextColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.white));
+            unSelectOthers(levelClicked);
+            fabStartLevel.show();
         }
         if (v.getId() == R.id.fabChooseLevelBack) {
             mListener.onChooseLevelBackButtonPressed();
         }
         if (v.getId() == R.id.fabStartLevel) {
             mListener.onStartLevelClicked();
+        }
+    }
+
+    private void unSelectOthers(int levelClicked) {
+        if (levelClicked != 1) {
+            tvTestGeo.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.white_background));
+            tvTestGeo.setTextColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.black_text));
+        }
+        if (levelClicked != 2) {
+            tvTestHis.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.white_background));
+            tvTestHis.setTextColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.black_text));
+        }
+        if (levelClicked != 3) {
+            tvTestBio.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.white_background));
+            tvTestBio.setTextColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.black_text));
+        }
+        if (levelClicked != 4) {
+            tvTestPhi.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.white_background));
+            tvTestPhi.setTextColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.black_text));
         }
     }
 }

@@ -8,9 +8,10 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/action_bar_default_height_material"
         android:layout_alignParentTop="true"
-        android:background="@color/colorPrimary"
+        android:background="#BDBDBD"
         android:elevation="4dp"
         android:gravity="center"
+        android:textColor="@color/black_overlay"
         android:text="Изберете матура"
         android:textSize="@dimen/text_size_headline_material" />
 
@@ -41,7 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/action_bar_default_height_material"
                 android:layout_alignParentBottom="true"
-                android:background="@color/common_signin_btn_default_background" />
+                android:background="@color/colorGeography" />
 
         </RelativeLayout>
 
@@ -66,23 +67,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/action_bar_default_height_material"
                 android:layout_alignParentBottom="true"
-                android:background="@color/colorAccent" />
+                android:background="@color/colorHistory" />
 
         </RelativeLayout>
 
         <TextView
             android:id="@+id/tvVerticalLine"
-            android:layout_width="5dp"
+            android:layout_width="1dp"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
-            android:background="#000000" />
+            android:background="#BDBDBD" />
 
         <TextView
             android:id="@+id/tvHorizontalLine"
             android:layout_width="match_parent"
-            android:layout_height="5dp"
+            android:layout_height="1dp"
             android:layout_centerInParent="true"
-            android:background="#000000" />
+            android:background="#BDBDBD" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -105,7 +106,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/action_bar_default_height_material"
                 android:layout_alignParentBottom="true"
-                android:background="#156156" />
+                android:background="@color/colorBiology" />
 
         </RelativeLayout>
 
@@ -130,17 +131,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/action_bar_default_height_material"
                 android:layout_alignParentBottom="true"
-                android:background="@color/colorPrimaryDark" />
+                android:background="@color/colorPhilosophy" />
 
         </RelativeLayout>
     </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/llForButtons"
+        android:elevation="4dp"
         android:layout_width="match_parent"
         android:layout_height="112dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/common_signin_btn_light_text_default"
         android:baselineAligned="false"
 
         android:orientation="horizontal"
@@ -153,6 +154,7 @@
 
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/fabChooseLevelBack"
+                android:src="@drawable/google_controller_off"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center" />
@@ -165,6 +167,8 @@
 
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/fabStartLevel"
+                android:src="@drawable/google_controller"
+                android:visibility="invisible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center" />

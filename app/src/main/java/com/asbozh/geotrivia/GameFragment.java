@@ -5,12 +5,14 @@ import android.app.Fragment;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -19,8 +21,11 @@ import java.util.Random;
 public class GameFragment extends Fragment implements View.OnClickListener {
 
     private TextView tvQuestion, tvOption1, tvOption2, tvOption3, tvOption4;
+    private RelativeLayout rlScoreLayout;
     private TextView tvUserName, tvCurrentQuestion, tvPoints;
     private FloatingActionButton fabAnswer;
+
+    private int selectColor;
 
     private int mChosenLevel;
 
@@ -95,10 +100,37 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         currentQuestion = 1;
         points = 0;
         initViews();
+        setColors();
         showFullQuestion();
     }
 
+    private void setColors() {
+        switch (mChosenLevel) {
+            case 1:         // Geography
+                tvQuestion.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.colorGeography));
+                rlScoreLayout.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.colorGeography_accent));
+                selectColor = Color.parseColor("#E0F2F1");
+                break;
+            case 2:        // History
+                tvQuestion.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.colorHistory));
+                rlScoreLayout.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.colorHistory_accent));
+                selectColor = Color.parseColor("#E8EAF6");
+                break;
+            case 3:        // Biology
+                tvQuestion.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.colorBiology));
+                rlScoreLayout.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.colorBiology_accent));
+                selectColor = Color.parseColor("#FFEBEE");
+                break;
+            case 4:        // Philosophy
+                tvQuestion.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.colorPhilosophy));
+                rlScoreLayout.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.colorPhilosophy_accent));
+                selectColor = Color.parseColor("#FCE4EC");
+                break;
+        }
+    }
+
     private void initViews() {
+        rlScoreLayout = (RelativeLayout) getActivity().findViewById(R.id.rlScoreLayout);
         tvQuestion = (TextView) getActivity().findViewById(R.id.tvQuestion);
         tvOption1 = (TextView) getActivity().findViewById(R.id.tvOption1);
         tvOption2 = (TextView) getActivity().findViewById(R.id.tvOption2);
@@ -112,6 +144,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         tvPoints = (TextView) getActivity().findViewById(R.id.tvPoints);
         setCurrentPoints();
         fabAnswer = (FloatingActionButton) getActivity().findViewById(R.id.fabAnswer);
+        fabAnswer.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.white)));
 
         tvOption1.setOnClickListener(this);
         tvOption2.setOnClickListener(this);
@@ -186,8 +219,14 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.fabAnswer:
                 checkAnswer();
-                hideFAB();
-                updateUI();
+                // Execute some code after some milliseconds have passed
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        hideFAB();
+                        updateUI();
+                    }
+                }, 700);
                 break;
         }
 
@@ -207,20 +246,22 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     }
 
     private void clearViews() {
-        tvOption1.setBackgroundColor(Color.WHITE);
-        tvOption2.setBackgroundColor(Color.WHITE);
-        tvOption3.setBackgroundColor(Color.WHITE);
-        tvOption4.setBackgroundColor(Color.WHITE);
-        fabAnswer.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getActivity().getApplicationContext(),R.color.colorAccent)));
+        tvOption1.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.white_background));
+        tvOption2.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.white_background));
+        tvOption3.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.white_background));
+        tvOption4.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.white_background));
+        fabAnswer.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getActivity().getApplicationContext(),R.color.white)));
     }
 
     private void checkAnswer() {
         if (correctAnswer.equals(currentAnswer)) {
             userAnswers[currentQuestion - 1] = 1;
             points++;
-            fabAnswer.setBackgroundTintList(ColorStateList.valueOf(Color.GREEN));
+            fabAnswer.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getActivity().getApplicationContext(),R.color.correct_answer)));
+            fabAnswer.setImageResource(R.drawable.check_white);
         } else {
-            fabAnswer.setBackgroundTintList(ColorStateList.valueOf(Color.RED));
+            fabAnswer.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getActivity().getApplicationContext(),R.color.wrong_answer)));
+            fabAnswer.setImageResource(R.drawable.close_white);
             userAnswers[currentQuestion - 1] = 0;
         }
 
@@ -234,32 +275,33 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     private void showFAB() {
         // animations to be implemented
         fabAnswer.show();
+        fabAnswer.setImageResource(R.drawable.correct);
     }
 
     private void markAnswer(int i) {
         if (i == 1) {
-            tvOption1.setBackgroundColor(Color.CYAN);
-            tvOption2.setBackgroundColor(Color.WHITE);
-            tvOption3.setBackgroundColor(Color.WHITE);
-            tvOption4.setBackgroundColor(Color.WHITE);
+            tvOption1.setBackgroundColor(selectColor);
+            tvOption2.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.white_background));
+            tvOption3.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.white_background));
+            tvOption4.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.white_background));
             currentAnswer = tvOption1.getText().toString();
         } else if (i == 2) {
-            tvOption2.setBackgroundColor(Color.CYAN);
-            tvOption1.setBackgroundColor(Color.WHITE);
-            tvOption3.setBackgroundColor(Color.WHITE);
-            tvOption4.setBackgroundColor(Color.WHITE);
+            tvOption2.setBackgroundColor(selectColor);
+            tvOption1.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.white_background));
+            tvOption3.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.white_background));
+            tvOption4.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.white_background));
             currentAnswer = tvOption2.getText().toString();
         } else if (i == 3) {
-            tvOption3.setBackgroundColor(Color.CYAN);
-            tvOption1.setBackgroundColor(Color.WHITE);
-            tvOption2.setBackgroundColor(Color.WHITE);
-            tvOption4.setBackgroundColor(Color.WHITE);
+            tvOption3.setBackgroundColor(selectColor);
+            tvOption1.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.white_background));
+            tvOption2.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.white_background));
+            tvOption4.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.white_background));
             currentAnswer = tvOption3.getText().toString();
         } else if (i == 4) {
-            tvOption4.setBackgroundColor(Color.CYAN);
-            tvOption1.setBackgroundColor(Color.WHITE);
-            tvOption2.setBackgroundColor(Color.WHITE);
-            tvOption3.setBackgroundColor(Color.WHITE);
+            tvOption4.setBackgroundColor(selectColor);
+            tvOption1.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.white_background));
+            tvOption2.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.white_background));
+            tvOption3.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.white_background));
             currentAnswer = tvOption4.getText().toString();
         }
     }

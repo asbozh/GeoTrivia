@@ -4,18 +4,21 @@ package com.asbozh.geotrivia;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class ResultFragment extends Fragment implements View.OnClickListener {
+public class ResultFragment extends Fragment {
 
-    private TextView tvHeader, tvFooter;
+    private TextView tvHeader;
+    private RelativeLayout rlHeader;
     private RecyclerView rvQuestions;
     private FloatingActionButton fabHome;
 
@@ -58,25 +61,42 @@ public class ResultFragment extends Fragment implements View.OnClickListener {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initViews();
+        setColors();
         RVAdapter adapter = new RVAdapter(getActivity().getApplicationContext(), currentTable, mQuestionsOrder, mUserAnswers);
         rvQuestions.setAdapter(adapter);
     }
 
+    private void setColors() {
+        if (currentTable.contains("GEO")) {
+            rlHeader.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.colorGeography));
+        } else if (currentTable.contains("HIS")) {
+            rlHeader.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.colorHistory));
+        } else if (currentTable.contains("BIO")) {
+            rlHeader.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.colorBiology));
+        } else if (currentTable.contains("PHI")) {
+            rlHeader.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.colorPhilosophy));
+        }
+    }
+
     private void initViews() {
+        rlHeader = (RelativeLayout) getActivity().findViewById(R.id.rlHeader);
         tvHeader = (TextView) getActivity().findViewById(R.id.tvHeader);
         String header = generateHeader();
         tvHeader.setText(header);
-        tvFooter = (TextView) getActivity().findViewById(R.id.tvFooter);
-        tvFooter.setOnClickListener(this);
 
         rvQuestions = (RecyclerView) getActivity().findViewById(R.id.recycler_view);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rvQuestions.setLayoutManager(layoutManager);
         rvQuestions.setHasFixedSize(true);
 
         fabHome = (FloatingActionButton) getActivity().findViewById(R.id.fabHome);
-        fabHome.setOnClickListener(this);
+        fabHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onPlayAgain();
+            }
+        });
     }
 
     private String generateHeader() {
@@ -115,20 +135,5 @@ public class ResultFragment extends Fragment implements View.OnClickListener {
         return "---";
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.tvFooter:
-
-                // Share on Facebook...
-
-                break;
-            case R.id.fabHome:
-
-                mListener.onPlayAgain();
-
-                break;
-        }
-    }
 
 }
