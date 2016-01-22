@@ -87,23 +87,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         mGameFragment = new GameFragment();
         mResultFragment = new ResultFragment();
 
-        // set fragments animations
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            mMainMenuFragment.setEnterTransition(new Slide());
-            mMainMenuFragment.setAllowEnterTransitionOverlap(true);
-            mChooseLevelFragment.setEnterTransition(new Explode());
-            mChooseLevelFragment.setExitTransition(new Explode());
-            mChooseLevelFragment.setAllowEnterTransitionOverlap(true);
-            mChooseLevelFragment.setAllowReturnTransitionOverlap(false);
-            mAboutUsFragment.setEnterTransition(new Fade());
-            mAboutUsFragment.setExitTransition(new Fade());
-            mAboutUsFragment.setAllowEnterTransitionOverlap(true);
-            mAboutUsFragment.setAllowReturnTransitionOverlap(true);
-            mGameFragment.setEnterTransition(new Fade());
-            mGameFragment.setAllowEnterTransitionOverlap(false);
-            mResultFragment.setEnterTransition(new Slide());
-            mResultFragment.setAllowEnterTransitionOverlap(true);
-        }
 
         // listen to fragment events
         mSignInFragment.setListener(this);
@@ -127,11 +110,11 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
 
         if (isFirstTimeStarted && !isSignedIn()) {
-            getFragmentManager().beginTransaction().add(R.id.fragment_container, mSignInFragment).commit();
             currentFragmentState = 1;
+            switchToFragment(currentFragmentState);
         } else {
-            getFragmentManager().beginTransaction().replace(R.id.fragment_container, mMainMenuFragment).commit();
             currentFragmentState = 2;
+            switchToFragment(currentFragmentState);
         }
         // load outbox from file
         mOutbox.loadLocal(this);
@@ -181,8 +164,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         mGoogleApiClient.connect();
         mSignInClicked = true;
         firstTimePassed();
-        getFragmentManager().beginTransaction().replace(R.id.fragment_container, mMainMenuFragment).commit();
         currentFragmentState = 2;
+        switchToFragment(currentFragmentState);
     }
 
     @Override
@@ -206,8 +189,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         }
 
         firstTimePassed();
-        getFragmentManager().beginTransaction().replace(R.id.fragment_container, mMainMenuFragment).commit();
         currentFragmentState = 2;
+        switchToFragment(currentFragmentState);
     }
 
     /***
@@ -329,8 +312,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
     @Override
     public void onStartNewGameClicked() {
-        getFragmentManager().beginTransaction().replace(R.id.fragment_container, mChooseLevelFragment).commit();
         currentFragmentState = 4;
+        switchToFragment(currentFragmentState);
     }
 
     @Override
@@ -355,8 +338,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
     @Override
     public void onAboutUsClicked() {
-        getFragmentManager().beginTransaction().replace(R.id.fragment_container, mAboutUsFragment).commit();
         currentFragmentState = 3;
+        switchToFragment(currentFragmentState);
     }
 
     /***
@@ -367,8 +350,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
     @Override
     public void onAboutUsBackClicked() {
-        getFragmentManager().beginTransaction().replace(R.id.fragment_container, mMainMenuFragment).commit();
         currentFragmentState = 2;
+        switchToFragment(currentFragmentState);
     }
 
     /***
@@ -379,16 +362,16 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
     @Override
     public void onChooseLevelBackButtonPressed() {
-        getFragmentManager().beginTransaction().replace(R.id.fragment_container, mMainMenuFragment).commit();
         currentFragmentState = 2;
+        switchToFragment(currentFragmentState);
     }
 
     @Override
     public void onStartLevelClicked() {
         mGameFragment.setChosenLevel(mChooseLevelFragment.getLevelClicked());
         mGameFragment.setNickName(mMainMenuFragment.getCurrentUserName());
-        getFragmentManager().beginTransaction().replace(R.id.fragment_container, mGameFragment).commit();
         currentFragmentState = 5;
+        switchToFragment(currentFragmentState);
     }
 
     /***
@@ -413,8 +396,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         // push those accomplishments to the cloud, if signed in
         pushAccomplishments();
 
-        getFragmentManager().beginTransaction().replace(R.id.fragment_container, mResultFragment).commit();
         currentFragmentState = 6;
+        switchToFragment(currentFragmentState);
     }
 
     private void checkForAchievements(int points) {
@@ -512,8 +495,49 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
     @Override
     public void onPlayAgain() {
-        getFragmentManager().beginTransaction().replace(R.id.fragment_container, mChooseLevelFragment).commit();
         currentFragmentState = 4;
+        switchToFragment(currentFragmentState);
+    }
+
+    private void switchToFragment(int fragmentNumber) {
+
+        // set fragments animations
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            mMainMenuFragment.setEnterTransition(new Slide());
+            mMainMenuFragment.setAllowEnterTransitionOverlap(true);
+            mChooseLevelFragment.setEnterTransition(new Explode());
+            mChooseLevelFragment.setExitTransition(new Explode());
+            mChooseLevelFragment.setAllowEnterTransitionOverlap(true);
+            mChooseLevelFragment.setAllowReturnTransitionOverlap(false);
+            mAboutUsFragment.setEnterTransition(new Fade());
+            mAboutUsFragment.setExitTransition(new Fade());
+            mAboutUsFragment.setAllowEnterTransitionOverlap(true);
+            mAboutUsFragment.setAllowReturnTransitionOverlap(false);
+            mGameFragment.setEnterTransition(new Fade());
+            mGameFragment.setAllowEnterTransitionOverlap(false);
+            mResultFragment.setEnterTransition(new Slide());
+            mResultFragment.setAllowEnterTransitionOverlap(true);
+        }
+        switch (fragmentNumber) {
+            case 1:
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container, mSignInFragment).commit();
+                break;
+            case 2:
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container, mMainMenuFragment).commit();
+                break;
+            case 3:
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container, mAboutUsFragment).commit();
+                break;
+            case 4:
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container, mChooseLevelFragment).commit();
+                break;
+            case 5:
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container, mGameFragment).commit();
+                break;
+            case 6:
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container, mResultFragment).commit();
+                break;
+        }
     }
 
 
@@ -521,8 +545,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     public void onBackPressed() {
         // 1 - SignInFragment, 2 - MainMenuFragment, 3 - AboutUsFragment, 4 - ChooseLevelFragment, 5 - GameFragment, 6 - ResultFragment
         if (currentFragmentState == 3 || currentFragmentState == 4 || currentFragmentState == 6) {
-            getFragmentManager().beginTransaction().replace(R.id.fragment_container, mMainMenuFragment).commit();
             currentFragmentState = 2;
+            switchToFragment(currentFragmentState);
         } else if (currentFragmentState == 5) {
             AlertDialog.Builder adBuilder = new AlertDialog.Builder(this);
             adBuilder.setMessage(getString(R.string.exit_dialog_body));
@@ -530,8 +554,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             adBuilder.setPositiveButton(getResources().getString(R.string.exit_dialog_positive), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    getFragmentManager().beginTransaction().replace(R.id.fragment_container, mMainMenuFragment).commit();
                     currentFragmentState = 2;
+                    switchToFragment(currentFragmentState);
                 }
             });
             adBuilder.setNegativeButton(getResources().getString(R.string.exit_dialog_negative), new DialogInterface.OnClickListener() {
