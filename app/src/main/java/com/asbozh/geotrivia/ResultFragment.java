@@ -102,13 +102,13 @@ public class ResultFragment extends Fragment {
     private String generateHeader() {
 
         StringBuilder builder = new StringBuilder();
-        if (currentTable.contains("GEO")) {
+        if (currentTable.contains("_GEO_")) {
             builder.append("Област: География\n");
-        } else if (currentTable.contains("HIS")) {
+        } else if (currentTable.contains("_HIS_")) {
             builder.append("Област: История\n");
-        } else if (currentTable.contains("BIO")) {
+        } else if (currentTable.contains("_BIO_")) {
             builder.append("Област: Биология\n");
-        } else if (currentTable.contains("PHI")) {
+        } else if (currentTable.contains("_PHI_")) {
             builder.append("Област: Философия\n");
         } else {
             builder.append("Област: --- \n");

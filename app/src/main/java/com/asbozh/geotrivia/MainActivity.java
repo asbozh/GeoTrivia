@@ -56,6 +56,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     private static final int RC_SIGN_IN = 9001;
 
 
+    // achievements and scores we're pending to push to the cloud
+    // (waiting for the user to sign in)
+    AccomplishmentsOutbox mOutbox = new AccomplishmentsOutbox();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,6 +110,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             getFragmentManager().beginTransaction().add(R.id.fragment_container, mMainMenuFragment).commit();
             currentFragmentState = 2;
         }
+        // load outbox from file
+        mOutbox.loadLocal(this);
 
     }
 
@@ -206,6 +212,13 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
         // Sign-in failed, so show sign-in button on main menu
         Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show();
+
+        // if there are accomplishments to push, push them
+        if (!mOutbox.isEmpty()) {
+            pushAccomplishments();
+            Toast.makeText(this, getString(R.string.uploading_offline_progress),
+                    Toast.LENGTH_LONG).show();
+        }
 
 
     }
@@ -367,8 +380,105 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         mResultFragment.setCurrentTable(mGameFragment.getCurrentTable());
         mResultFragment.setmQuestionsOrder(mGameFragment.getmQuestionsOrder());
         mResultFragment.setmUserAnswers(mGameFragment.getUserAnswers());
+
+        // check for achievements
+        checkForAchievements(mGameFragment.getPoints());
+
+        // update leader boards
+        updateLeaderBoards(mGameFragment.getCurrentTable(), mGameFragment.getPoints());
+
+        // push those accomplishments to the cloud, if signed in
+        pushAccomplishments();
+
         getFragmentManager().beginTransaction().replace(R.id.fragment_container, mResultFragment).commit();
         currentFragmentState = 6;
+    }
+
+    private void checkForAchievements(int points) {
+
+        if (points == 0) {
+            mOutbox.mFunnyAchievement = true;
+            achievementToast(getString(R.string.achievement_funny_toast_text));
+        }
+        if (points > 25) {
+            mOutbox.mNerdAchievement = true;
+            achievementToast(getString(R.string.achievement_nerd_toast_text));
+        }
+        if (points == 30) {
+            mOutbox.mGeniusAchievement = true;
+            achievementToast(getString(R.string.achievement_genius_toast_text));
+        }
+        mOutbox.mGamesPlayed++;
+    }
+
+    private void achievementToast(String toast) {
+        // Only show toast if not signed in. If signed in, the standard Google Play toasts will appear
+        if (!isSignedIn()) {
+            Toast.makeText(this, toast,
+                    Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void updateLeaderBoards(String subject, int points) {
+        if (subject.contains("_GEO_") && mOutbox.mGeoScore < points) {
+            mOutbox.mGeoScore = points;
+        } else if (subject.contains("_HIS_") && mOutbox.mHisScore < points) {
+            mOutbox.mHisScore = points;
+        } else if (subject.contains("_BIO_") && mOutbox.mBioScore < points) {
+            mOutbox.mBioScore = points;
+        } else if (subject.contains("_PHI_") && mOutbox.mPhiScore < points) {
+            mOutbox.mPhiScore = points;
+        }
+    }
+
+    private void pushAccomplishments() {
+        if (!isSignedIn()) {
+            // can't push to the cloud, so save locally
+            mOutbox.saveLocal(this);
+            return;
+        }
+        if (mOutbox.mFunnyAchievement) {
+            Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_funny));
+            mOutbox.mFunnyAchievement = false;
+        }
+        if (mOutbox.mNerdAchievement) {
+            Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_nerd));
+            mOutbox.mNerdAchievement = false;
+        }
+        if (mOutbox.mGeniusAchievement) {
+            Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_genius));
+            mOutbox.mGeniusAchievement = false;
+        }
+        if (mOutbox.mGamesPlayed > 0) {
+            Games.Achievements.increment(mGoogleApiClient, getString(R.string.achievement_curious),
+                    mOutbox.mGamesPlayed);
+            Games.Achievements.increment(mGoogleApiClient, getString(R.string.achievement_addicted),
+                    mOutbox.mGamesPlayed);
+            Games.Achievements.increment(mGoogleApiClient, getString(R.string.achievement_maniac),
+                    mOutbox.mGamesPlayed);
+            mOutbox.mGamesPlayed = 0;
+        }
+        if (mOutbox.mGeoScore >= 0) {
+            Games.Leaderboards.submitScore(mGoogleApiClient, getString(R.string.leaderboard_geo),
+                    mOutbox.mGeoScore);
+            mOutbox.mGeoScore = -1;
+        }
+        if (mOutbox.mHisScore >= 0) {
+            Games.Leaderboards.submitScore(mGoogleApiClient, getString(R.string.leaderboard_his),
+                    mOutbox.mHisScore);
+            mOutbox.mHisScore = -1;
+        }
+        if (mOutbox.mBioScore >= 0) {
+            Games.Leaderboards.submitScore(mGoogleApiClient, getString(R.string.leaderboard_bio),
+                    mOutbox.mBioScore);
+            mOutbox.mBioScore = -1;
+        }
+        if (mOutbox.mPhiScore >= 0) {
+            Games.Leaderboards.submitScore(mGoogleApiClient, getString(R.string.leaderboard_phi),
+                    mOutbox.mPhiScore);
+            mOutbox.mPhiScore = -1;
+        }
+        mOutbox.saveLocal(this);
     }
 
     /***

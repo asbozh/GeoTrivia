@@ -37,4 +37,9 @@
     <string name="exit_dialog_positive">Да</string>
     <string name="exit_dialog_negative">Не</string>
 
+    <string name="achievement_funny_toast_text">Отключихте постижението \"Забавен\" (0 верни отговори)!</string>
+    <string name="achievement_nerd_toast_text">Отключихте постижението \"Зубър\" (Оценка: Отличен)!</string>
+    <string name="achievement_genius_toast_text">Отключихте постижението \"Гений\" (Матура без грешка)!</string>
+    <string name="uploading_offline_progress">Синхронизиране..</string>
+
 </resources>
