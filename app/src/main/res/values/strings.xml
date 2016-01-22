@@ -20,6 +20,9 @@
     <string name="menuAchievements">Постижения</string>
     <string name="menuAboutUs">Информация</string>
 
+    <string name="achievements_not_available">Моля влезте в акаунта си, за да видите постиженията.</string>
+    <string name="leaderboards_not_available">Моля влезте в акаунта си, за да видите класиранията.</string>
+
     <string name="about_us_text">Atanas Bozhkov\nF54630</string>
 
     <string name="database_created">com.asbozh.startactivity.database_created</string>

@@ -4,13 +4,15 @@
     <string name="app_id">731779704739</string>
 
     <!-- TODO: Replace these by your achievement/leaderboard IDs! -->
-    <string name="achievement_prime">ReplaceMe</string>
-    <string name="achievement_really_bored">ReplaceMe</string>
-    <string name="achievement_bored">ReplaceMe</string>
-    <string name="achievement_humble">ReplaceMe</string>
-    <string name="achievement_arrogant">ReplaceMe</string>
-    <string name="achievement_leet">ReplaceMe</string>
+    <string name="achievement_curious">CgkIo8_gi6YVEAIQBQ</string>
+    <string name="achievement_addicted">CgkIo8_gi6YVEAIQBg</string>
+    <string name="achievement_maniac">CgkIo8_gi6YVEAIQBw</string>
+    <string name="achievement_funny">CgkIo8_gi6YVEAIQCA</string>
+    <string name="achievement_nerd">CgkIo8_gi6YVEAIQCQ</string>
+    <string name="achievement_genius">CgkIo8_gi6YVEAIQCg</string>
 
-    <string name="leaderboard_easy">ReplaceMe</string>
-    <string name="leaderboard_hard">ReplaceMe</string>
+    <string name="leaderboard_geo">CgkIo8_gi6YVEAIQAQ</string>
+    <string name="leaderboard_his">CgkIo8_gi6YVEAIQAg</string>
+    <string name="leaderboard_bio">CgkIo8_gi6YVEAIQAw</string>
+    <string name="leaderboard_phi">CgkIo8_gi6YVEAIQBA</string>
 </resources>

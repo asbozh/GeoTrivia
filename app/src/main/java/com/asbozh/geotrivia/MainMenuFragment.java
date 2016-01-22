@@ -17,7 +17,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.common.SignInButton;
 
@@ -164,12 +163,10 @@ public class MainMenuFragment extends Fragment implements View.OnClickListener {
 
         if (view.getId() == R.id.bLeaderBoard || view.getId() == R.id.fabLeaderBoard) {
             mListener.onLeaderBoardClicked();
-            Toast.makeText(getActivity(), "Leader Board under construction", Toast.LENGTH_SHORT).show();
         }
 
         if (view.getId() == R.id.bAchievements || view.getId() == R.id.fabAchievements) {
             mListener.onAchievementsClicked();
-            Toast.makeText(getActivity(), "Achievements under construction", Toast.LENGTH_SHORT).show();
         }
 
         if (view.getId() == R.id.bAboutUs || view.getId() == R.id.fabAboutUs) {
