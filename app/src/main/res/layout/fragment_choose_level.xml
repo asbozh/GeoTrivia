@@ -33,6 +33,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_above="@+id/tvColoredGeo"
+                android:background="@color/colorGeography_50"
                 android:gravity="center"
                 android:text="География"
                 android:textSize="@dimen/text_size_headline_material" />
@@ -59,6 +60,7 @@
                 android:layout_height="match_parent"
                 android:layout_above="@+id/tvColoredHis"
                 android:gravity="center"
+                android:background="@color/colorHistory_50"
                 android:text="История"
                 android:textSize="@dimen/text_size_headline_material" />
 
@@ -73,7 +75,7 @@
 
         <TextView
             android:id="@+id/tvVerticalLine"
-            android:layout_width="1dp"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
             android:background="#BDBDBD" />
@@ -81,7 +83,7 @@
         <TextView
             android:id="@+id/tvHorizontalLine"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="0dp"
             android:layout_centerInParent="true"
             android:background="#BDBDBD" />
 
@@ -98,6 +100,7 @@
                 android:layout_height="match_parent"
                 android:layout_above="@+id/tvColored2013"
                 android:gravity="center"
+                android:background="@color/colorBiology_50"
                 android:text="Биология"
                 android:textSize="@dimen/text_size_headline_material" />
 
@@ -122,6 +125,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_above="@+id/tvColoredPhi"
+                android:background="@color/colorPhilosophy_50"
                 android:gravity="center"
                 android:text="Философия"
                 android:textSize="@dimen/text_size_headline_material" />

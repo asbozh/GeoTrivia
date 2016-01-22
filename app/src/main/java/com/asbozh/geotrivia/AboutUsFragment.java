@@ -33,7 +33,6 @@ public class AboutUsFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         fabAboutUsBack = (FloatingActionButton) getActivity().findViewById(R.id.fabAboutUsBack);
-        fabAboutUsBack.show();
         fabAboutUsBack.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.colorAboutUsBackFAB)));
         fabAboutUsBack.setOnClickListener(new View.OnClickListener() {
             @Override

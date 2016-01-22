@@ -118,19 +118,19 @@ public class ChooseLevelFragment extends Fragment implements View.OnClickListene
 
     private void unSelectOthers(int levelClicked) {
         if (levelClicked != 1) {
-            tvTestGeo.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.white_background));
+            tvTestGeo.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.colorGeography_50));
             tvTestGeo.setTextColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.black_text));
         }
         if (levelClicked != 2) {
-            tvTestHis.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.white_background));
+            tvTestHis.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.colorHistory_50));
             tvTestHis.setTextColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.black_text));
         }
         if (levelClicked != 3) {
-            tvTestBio.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.white_background));
+            tvTestBio.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.colorBiology_50));
             tvTestBio.setTextColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.black_text));
         }
         if (levelClicked != 4) {
-            tvTestPhi.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.white_background));
+            tvTestPhi.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.colorPhilosophy_50));
             tvTestPhi.setTextColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.black_text));
         }
     }

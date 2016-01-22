@@ -5,8 +5,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.transition.Explode;
+import android.transition.Fade;
+import android.transition.Slide;
 import android.util.Log;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -83,6 +87,24 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         mGameFragment = new GameFragment();
         mResultFragment = new ResultFragment();
 
+        // set fragments animations
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            mMainMenuFragment.setEnterTransition(new Slide());
+            mMainMenuFragment.setAllowEnterTransitionOverlap(true);
+            mChooseLevelFragment.setEnterTransition(new Explode());
+            mChooseLevelFragment.setExitTransition(new Explode());
+            mChooseLevelFragment.setAllowEnterTransitionOverlap(true);
+            mChooseLevelFragment.setAllowReturnTransitionOverlap(false);
+            mAboutUsFragment.setEnterTransition(new Fade());
+            mAboutUsFragment.setExitTransition(new Fade());
+            mAboutUsFragment.setAllowEnterTransitionOverlap(true);
+            mAboutUsFragment.setAllowReturnTransitionOverlap(true);
+            mGameFragment.setEnterTransition(new Fade());
+            mGameFragment.setAllowEnterTransitionOverlap(false);
+            mResultFragment.setEnterTransition(new Slide());
+            mResultFragment.setAllowEnterTransitionOverlap(true);
+        }
+
         // listen to fragment events
         mSignInFragment.setListener(this);
         mMainMenuFragment.setListener(this);
@@ -103,11 +125,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         Log.d("asbozh", "local nick name: " + mLocalNickName);
         Log.d("asbozh", "offline: " + isOffline);
 
+
         if (isFirstTimeStarted && !isSignedIn()) {
             getFragmentManager().beginTransaction().add(R.id.fragment_container, mSignInFragment).commit();
             currentFragmentState = 1;
         } else {
-            getFragmentManager().beginTransaction().add(R.id.fragment_container, mMainMenuFragment).commit();
+            getFragmentManager().beginTransaction().replace(R.id.fragment_container, mMainMenuFragment).commit();
             currentFragmentState = 2;
         }
         // load outbox from file
