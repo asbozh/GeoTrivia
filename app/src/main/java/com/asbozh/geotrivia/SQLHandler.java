@@ -106,39 +106,61 @@ public class SQLHandler {
         return mDatabase.insert(tableName, null, cv);
     }
     public String getQuestion (String tableName, int number) throws SQLException {
+        String result = null;
         String[] columns = new String[] { KEY_ROWID, KEY_QUESTION, KEY_OPTION1, KEY_OPTION2, KEY_OPTION3, KEY_OPTION4, KEY_ANSWER };
-        Cursor c = mDatabase.query(tableName, columns, KEY_ROWID + "=" + number, null, null, null, null);
-        if (c != null) {
-            c.moveToFirst();
-            return checkForNewLines(c.getString(1));
+        Cursor c = null;
+        try {
+            c = mDatabase.query(tableName, columns, KEY_ROWID + "=" + number, null, null, null, null);
+            if (c != null) {
+                c.moveToFirst();
+                result = checkForNewLines(c.getString(1));
+            }
+        } finally {
+            if (c != null) {
+                c.close();
+            }
         }
-        return null;
+
+        return result;
     }
 
     public String getAnswer (String tableName, int number) throws SQLException {
+        String result = null;
         String[] columns = new String[] { KEY_ROWID, KEY_QUESTION, KEY_OPTION1, KEY_OPTION2, KEY_OPTION3, KEY_OPTION4, KEY_ANSWER };
-        Cursor c = mDatabase.query(tableName, columns, KEY_ROWID + "=" + number, null, null, null, null);
-        if (c != null) {
-            c.moveToFirst();
-            return c.getString(6);
+        Cursor c = null;
+        try {
+            c = mDatabase.query(tableName, columns, KEY_ROWID + "=" + number, null, null, null, null);
+            if (c != null) {
+                c.moveToFirst();
+                result = c.getString(6);
+            }
+        } finally {
+            if (c != null) {
+                c.close();
+            }
         }
-        return null;
+        return result;
     }
 
     public String[] getOptions (String tableName, int number) throws SQLException {
+        String options[] = new String[4];
         String[] columns = new String[] { KEY_ROWID, KEY_QUESTION, KEY_OPTION1, KEY_OPTION2, KEY_OPTION3, KEY_OPTION4, KEY_ANSWER };
-        Cursor c = mDatabase.query(tableName, columns, KEY_ROWID + "=" + number, null, null, null, null);
-        if (c != null) {
-            c.moveToFirst();
-
-            String options[] = new String[4];
-            options[0] = c.getString(2);
-            options[1] = c.getString(3);
-            options[2] = c.getString(4);
-            options[3] = c.getString(5);
-            return options;
+        Cursor c = null;
+        try {
+            c = mDatabase.query(tableName, columns, KEY_ROWID + "=" + number, null, null, null, null);
+            if (c != null) {
+                c.moveToFirst();
+                options[0] = c.getString(2);
+                options[1] = c.getString(3);
+                options[2] = c.getString(4);
+                options[3] = c.getString(5);
+            }
+        } finally {
+            if (c != null) {
+                c.close();
+            }
         }
-        return null;
+        return options;
     }
 
     private String checkForNewLines(String question) {
