@@ -216,14 +216,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         editor.apply();
         Log.d("asbozh", "onConnected(): Connected");
 
-        // Sign-in failed, so show sign-in button on main menu
-        Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show();
 
         // if there are accomplishments to push, push them
         if (!mOutbox.isEmpty()) {
             pushAccomplishments();
-            Toast.makeText(this, getString(R.string.uploading_offline_progress),
-                    Toast.LENGTH_LONG).show();
         }
 
 
