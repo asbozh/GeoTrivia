@@ -41,5 +41,10 @@
     <string name="achievement_nerd_toast_text">Отключихте постижението \"Зубър\" (Оценка: Отличен)!</string>
     <string name="achievement_genius_toast_text">Отключихте постижението \"Гений\" (Матура без грешка)!</string>
     <string name="uploading_offline_progress">Синхронизиране..</string>
+    <string name="choose_subject">Изберете матура</string>
+    <string name="subject_geo">География</string>
+    <string name="subject_his">История</string>
+    <string name="subject_bio">Биология</string>
+    <string name="subject_phi">Философия</string>
 
 </resources>

@@ -190,12 +190,26 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         handler.open();
         tvQuestion.setText(handler.getQuestion(currentTable, mQuestionsOrder.get(currentQuestion - 1)));
         String[] options = handler.getOptions(currentTable, mQuestionsOrder.get(currentQuestion - 1));
+        options = shuffleAnswers(options);
         tvOption1.setText(options[0]);
         tvOption2.setText(options[1]);
         tvOption3.setText(options[2]);
         tvOption4.setText(options[3]);
         correctAnswer = handler.getAnswer(currentTable, mQuestionsOrder.get(currentQuestion - 1));
         handler.close();
+    }
+
+    private String[] shuffleAnswers(String[] options) {
+        Random random = new Random();
+        String temp;
+        int randomIndex;
+        for (int i = 0; i <= (options.length) * 3 ; i++) {
+            randomIndex = 1 + random.nextInt(options.length - 1);
+            temp = options[0];
+            options[0] = options[randomIndex];
+            options[randomIndex] = temp;
+        }
+        return options;
     }
 
     @Override
