@@ -22,6 +22,7 @@ import com.google.android.gms.common.SignInButton;
 
 public class MainMenuFragment extends Fragment implements View.OnClickListener {
 
+    private RelativeLayout rlHeaderMainMenu;
     private TextView tvWelcomeUser;
     private String localUserName;
     private Button bSignOut;
@@ -63,6 +64,8 @@ public class MainMenuFragment extends Fragment implements View.OnClickListener {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         tvWelcomeUser = (TextView) getActivity().findViewById(R.id.tvWelcomeUser);
+        rlHeaderMainMenu = (RelativeLayout) getActivity().findViewById(R.id.rlHeaderMainMenu);
+        rlHeaderMainMenu.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.colorPrimary));
         initButtons();
         mListener.onSetToolbar();
     }

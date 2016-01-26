@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rlHeaderMainMenu"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/action_bar_default_height_material"
+        android:elevation="4dp"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:id="@+id/tvWelcomeUser"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:gravity="center_vertical"
+            android:layout_toStartOf="@+id/bSignIn"
+            android:layout_toLeftOf="@+id/bSignIn"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:text="@string/tvHello"
+            android:textColor="@color/black_overlay"
+            android:textSize="@dimen/text_size_headline_material" />
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/bSignIn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true" />
+
+        <Button
+            android:id="@+id/bSignOut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:text="@string/button_sign_out"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabNewGame"
+            android:src="@drawable/play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/fabLeaderBoard"
+            android:layout_marginBottom="30dp"
+            android:layout_toLeftOf="@+id/tvCentralVertical"
+            android:layout_toStartOf="@+id/tvCentralVertical" />
+
+        <Button
+            android:id="@+id/bNewGame"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/fabNewGame"
+            android:layout_alignRight="@+id/bAchievements"
+            android:layout_alignEnd="@+id/bAchievements"
+            android:layout_toEndOf="@+id/fabNewGame"
+            android:layout_toRightOf="@+id/fabNewGame"
+            android:gravity="center_vertical"
+            android:text="@string/menuNewGame" />
+
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabLeaderBoard"
+            android:src="@drawable/star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/tvCentralHorizontal"
+            android:layout_alignLeft="@+id/fabNewGame"
+            android:layout_alignStart="@+id/fabNewGame"
+            android:layout_marginBottom="15dp" />
+
+        <Button
+            android:id="@+id/bLeaderBoard"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/fabLeaderBoard"
+            android:layout_alignRight="@+id/bAchievements"
+            android:layout_alignEnd="@+id/bAchievements"
+            android:layout_toEndOf="@+id/fabNewGame"
+            android:layout_toRightOf="@+id/fabNewGame"
+            android:gravity="center_vertical"
+            android:text="@string/menuLeaderBoard" />
+
+        <TextView
+            android:id="@+id/tvCentralHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true" />
+
+        <TextView
+            android:id="@+id/tvCentralVertical"
+            android:layout_width="65dp"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabAchievements"
+            android:src="@drawable/trophy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/fabLeaderBoard"
+            android:layout_alignStart="@+id/fabLeaderBoard"
+            android:layout_below="@+id/tvCentralHorizontal"
+            android:layout_marginTop="15dp" />
+
+        <Button
+            android:id="@+id/bAchievements"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/tvCentralHorizontal"
+            android:layout_alignBottom="@+id/fabAchievements"
+            android:layout_toEndOf="@+id/fabAchievements"
+            android:layout_toRightOf="@+id/fabAchievements"
+            android:gravity="center_vertical"
+            android:text="@string/menuAchievements" />
+
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabAboutUs"
+            android:src="@drawable/school"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/fabAchievements"
+            android:layout_alignStart="@+id/fabAchievements"
+            android:layout_below="@+id/fabAchievements"
+            android:layout_marginTop="30dp" />
+
+        <Button
+            android:id="@+id/bAboutUs"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/fabAboutUs"
+            android:layout_toEndOf="@+id/fabAboutUs"
+            android:layout_toRightOf="@+id/fabAboutUs"
+            android:gravity="center_vertical"
+            android:text="@string/menuAboutUs" />
+    </RelativeLayout>
+</LinearLayout>

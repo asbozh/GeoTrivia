@@ -20,7 +20,7 @@ public class ChooseLevelFragment extends Fragment implements View.OnClickListene
     private int levelClicked = 0;
 
 
-    private TextView tvTestGeo, tvColoredGeo, tvTestHis, tvColoredHis, tvTestBio, tvColoredBio, tvTestPhi, tvColoredPhi;
+    private TextView tvHeaderChooseLevel, tvTestGeo, tvColoredGeo, tvTestHis, tvColoredHis, tvTestBio, tvColoredBio, tvTestPhi, tvColoredPhi;
     private FloatingActionButton fabStartLevel, fabChooseLevelBack;
 
     public interface Listener {
@@ -48,10 +48,12 @@ public class ChooseLevelFragment extends Fragment implements View.OnClickListene
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initViews();
-
+        unSelectOthers(0);
     }
 
     private void initViews() {
+        tvHeaderChooseLevel = (TextView) getActivity().findViewById(R.id.tvChooseLevel);
+        tvHeaderChooseLevel.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.colorPrimary));
         tvTestGeo = (TextView) getActivity().findViewById(R.id.tvTestGeo);
         tvColoredGeo = (TextView) getActivity().findViewById(R.id.tvColoredGeo);
         tvTestHis = (TextView) getActivity().findViewById(R.id.tvTestHis);
