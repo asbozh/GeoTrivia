@@ -249,20 +249,36 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.fabAnswer:
                 if (isMarked) {
+                    disableOptions();
                     checkAnswer();
                     // Execute some code after some milliseconds have passed
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
-                    public void run() {
+                        public void run() {
                             hideFAB();
                             updateUI();
+                            enableOptions();
                         }
-                }, 700);
+                    }, 700);
                 }
                 break;
         }
 
 
+    }
+
+    private void enableOptions() {
+        tvOption1.setClickable(true);
+        tvOption2.setClickable(true);
+        tvOption3.setClickable(true);
+        tvOption4.setClickable(true);
+    }
+
+    private void disableOptions() {
+        tvOption1.setClickable(false);
+        tvOption2.setClickable(false);
+        tvOption3.setClickable(false);
+        tvOption4.setClickable(false);
     }
 
     private void updateUI() {
