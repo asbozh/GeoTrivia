@@ -20,6 +20,7 @@ public class StartActivity extends AppCompatActivity {
     private static final String DATABASE_TABLE_HIS = "TABLE_HIS_Questions";
     private static final String DATABASE_TABLE_BIO = "TABLE_BIO_Questions";
     private static final String DATABASE_TABLE_PHI = "TABLE_PHI_Questions";
+    private static final int DATABASE_VERSION = 2;
 
     SQLHandler SQLdb = new SQLHandler(this);
     ProgressBar progressBar;
@@ -27,6 +28,7 @@ public class StartActivity extends AppCompatActivity {
     // SharedPreferences object and variables
     SharedPreferences mSharedPreferences;
     private boolean isSQLdbCreated = false;
+    private int currentDataBaseVersion = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +37,9 @@ public class StartActivity extends AppCompatActivity {
         // Loading saved shared preferences
         mSharedPreferences = getPreferences(Context.MODE_PRIVATE);
         isSQLdbCreated = mSharedPreferences.getBoolean(getString(R.string.database_created), false);
+        currentDataBaseVersion = mSharedPreferences.getInt(getString(R.string.database_version), 1);
 
-        if (!isSQLdbCreated) {
+        if (!isSQLdbCreated || currentDataBaseVersion != DATABASE_VERSION) {
             setContentView(R.layout.activity_start);
             progressBar = (ProgressBar) findViewById(R.id.pbCreatingDb);
             progressBar.setMax(100);
@@ -181,8 +184,10 @@ public class StartActivity extends AppCompatActivity {
             super.onPostExecute(aBoolean);
             if (aBoolean) {
                 isSQLdbCreated = true;
+                currentDataBaseVersion = DATABASE_VERSION;
                 SharedPreferences.Editor editor = mSharedPreferences.edit();
                 editor.putBoolean(getString(R.string.database_created), isSQLdbCreated);
+                editor.putInt(getString(R.string.database_version), currentDataBaseVersion);
                 editor.apply();
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
             } else {

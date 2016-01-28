@@ -26,6 +26,7 @@
     <string name="about_us_text">Atanas Bozhkov\nF54630</string>
 
     <string name="database_created">com.asbozh.startactivity.database_created</string>
+    <string name="database_version">com.asbozh.startactivity.database_version</string>
 
     <string name="saved_first_time">com.asbozh.mainactivity.saved_first_time</string>
     <string name="saved_nickname">com.asbozh.mainactivity.saved_nickname</string>

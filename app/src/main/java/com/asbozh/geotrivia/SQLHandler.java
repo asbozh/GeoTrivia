@@ -25,7 +25,7 @@ public class SQLHandler {
     private static final String DATABASE_TABLE_HIS = "TABLE_HIS_Questions";
     private static final String DATABASE_TABLE_BIO = "TABLE_BIO_Questions";
     private static final String DATABASE_TABLE_PHI = "TABLE_PHI_Questions";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     private DbHelper mHelper;
     private final Context mContext;
